@@ -23,36 +23,58 @@ const gameboard = (function () {
     return shipArr;
   }
 
+  function checkPlaceShip(coordinates, newShip) {
+    for (let i = 0; i < newShip.len; i++) {
+      if (
+        board[coordinates[0]][coordinates[1] + i] !== 0 ||
+        board[coordinates[0] + i][coordinates[1]] !== 0
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   // to place a ship on the gameboard
   function placeShip(len, coordinates, direction) {
     const newShip = ships(len, shipArr, direction);
-    shipArr.push(newShip);
 
-    if (
-      newShip.direction === 'horizontal' &&
-      coordinates[1] + newShip.len < 10
-    ) {
-      for (let i = 0; i < newShip.len; i++) {
-        board[coordinates[0]][coordinates[1] + i] = newShip.id;
-      }
-    } else if (
-      newShip.direction === 'vertical' &&
-      coordinates[0] + newShip.len < 10
-    ) {
-      for (let i = 0; i < newShip.len; i++) {
-        board[coordinates[0] + i][coordinates[1]] = newShip.id;
+    if (checkPlaceShip(coordinates, newShip)) {
+      shipArr.push(newShip);
+      if (newShip.direction === 'horizontal' && coordinates[1] + newShip.len < 10) {
+        for (let i = 0; i < newShip.len; i++) {
+          board[coordinates[0]][coordinates[1] + i] = newShip.id;
+        }
+      } else if (newShip.direction === 'vertical' && coordinates[0] + newShip.len < 10) {
+        for (let i = 0; i < newShip.len; i++) {
+          board[coordinates[0] + i][coordinates[1]] = newShip.id;
+        }
       }
     } else {
       // ship is not placed
-      return 0;
+      return false;
     }
     return 1;
   }
-
+  function receiveAttack(coordinate) {
+    const grid = board[coordinate[0]][coordinate[1]];
+    const arr = shipArr.filter((item) => item.id === grid);
+    if (arr.length) {
+      arr.forEach((item) => {
+        if (item.id === grid) {
+          item.hitOnce();
+        }
+      });
+    } else {
+      // missed shot
+      board[coordinate[0]][coordinate[1]] = 'm';
+    }
+  }
   return {
     displayBoard,
     displayShipArr,
     placeShip,
+    receiveAttack,
   };
 })();
 

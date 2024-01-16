@@ -14,6 +14,7 @@ describe('ship creation', () => {
 
   it('test ship hits and sunk', () => {
     for (let i = 0; i < obj.len; i++) {
+      expect(obj.sunk).toBe(false);
       expect(obj.hits + 1).toBe(obj.hitOnce());
     }
     expect(obj.sunk).toBe(true);
