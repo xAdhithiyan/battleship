@@ -1,4 +1,5 @@
 {
+  "plugins": ["import"],
   "env": {
     "browser": true,
     "es2021": true,
@@ -12,6 +13,7 @@
   "rules": {
     "no-console": "off",
     "no-plusplus": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "import/extensions": "off"
   }
 }

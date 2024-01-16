@@ -1,4 +1,4 @@
-function ships(len, arr) {
+function ships(len, arr, direction) {
   const id = arr.length + 1;
   const hits = 0;
   const sunk = false;
@@ -25,6 +25,7 @@ function ships(len, arr) {
     len,
     hits,
     sunk,
+    direction,
     hitOnce,
   };
 }

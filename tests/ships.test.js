@@ -1,13 +1,14 @@
 import ships from '../src/ships';
 
 describe('ship creation', () => {
-  const obj = ships(4, []);
+  const obj = ships(4, [], 'horizontal');
 
   it('test ship object structure', () => {
     expect(obj).toHaveProperty('id');
     expect(obj).toHaveProperty('len', 4);
     expect(obj).toHaveProperty('hits', 0);
     expect(obj).toHaveProperty('sunk', false);
+    expect(obj).toHaveProperty('direction');
     expect(obj).toHaveProperty('hitOnce');
   });
 

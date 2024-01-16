@@ -1,0 +1,3 @@
+- each file/function has a test file
+
+- at the end i will bundle them up using webpack if all the tests pass
