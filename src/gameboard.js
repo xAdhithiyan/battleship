@@ -74,6 +74,7 @@ const gameboard = function () {
       arr.forEach((item) => {
         if (item.id === grid) {
           item.hitOnce();
+          board[coordinate[0]][coordinate[1]] = 'h';
         }
       });
     } else {

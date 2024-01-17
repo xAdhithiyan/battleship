@@ -41,8 +41,11 @@ describe('gboard creation', () => {
       gboard.receiveAttack([attackCord[0] + i, attackCord[1]]);
     }
     expect(gboard.displayShipArr()[gboard.displayShipArr().length - 1].sunk).toBe(true);
+
     // to test missed shot
     gboard.receiveAttack([9, 9]);
     expect(gboard.displayBoard()[9][9]).toBe('m');
+
+    console.log(gboard.displayBoard());
   });
 });
