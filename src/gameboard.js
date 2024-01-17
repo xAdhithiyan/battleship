@@ -1,7 +1,7 @@
 import ships from './ships.js';
 
 // eslint-disable-next-line
-const gameboard = (function () {
+const gameboard = function () {
   const board = [];
   const shipArr = [];
 
@@ -23,13 +23,24 @@ const gameboard = (function () {
     return shipArr;
   }
 
+  // to check if ships have the
   function checkPlaceShip(coordinates, newShip) {
+    if (newShip.direction === 'horizontal' && coordinates[1] + newShip.len > 10) {
+      return false;
+    }
+    if (newShip.direction === 'vertical' && coordinates[0] + newShip.len > 10) {
+      return false;
+    }
+
     for (let i = 0; i < newShip.len; i++) {
-      if (
-        board[coordinates[0]][coordinates[1] + i] !== 0 ||
-        board[coordinates[0] + i][coordinates[1]] !== 0
-      ) {
-        return false;
+      if (newShip.direction === 'horizontal') {
+        if (board[coordinates[0]][coordinates[1] + i] !== 0) {
+          return false;
+        }
+      } else if (newShip.direction === 'vertical') {
+        if (board[coordinates[0] + i][coordinates[1]] !== 0) {
+          return false;
+        }
       }
     }
     return true;
@@ -41,11 +52,11 @@ const gameboard = (function () {
 
     if (checkPlaceShip(coordinates, newShip)) {
       shipArr.push(newShip);
-      if (newShip.direction === 'horizontal' && coordinates[1] + newShip.len < 10) {
+      if (newShip.direction === 'horizontal' && coordinates[1] + newShip.len <= 10) {
         for (let i = 0; i < newShip.len; i++) {
           board[coordinates[0]][coordinates[1] + i] = newShip.id;
         }
-      } else if (newShip.direction === 'vertical' && coordinates[0] + newShip.len < 10) {
+      } else if (newShip.direction === 'vertical' && coordinates[0] + newShip.len <= 10) {
         for (let i = 0; i < newShip.len; i++) {
           board[coordinates[0] + i][coordinates[1]] = newShip.id;
         }
@@ -70,12 +81,13 @@ const gameboard = (function () {
       board[coordinate[0]][coordinate[1]] = 'm';
     }
   }
+
   return {
     displayBoard,
     displayShipArr,
     placeShip,
     receiveAttack,
   };
-})();
+};
 
 export default gameboard;
