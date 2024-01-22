@@ -1,5 +1,6 @@
 import elFactory from './elFactory';
-import playGame, { playerBoard, computerBoard } from './playGame';
+import { playerBoard, computerBoard } from './players';
+import { clickHandler } from './playGame';
 
 function DOM() {
   const parentDiv = document.querySelector('body');
@@ -12,11 +13,9 @@ function DOM() {
 
     for (let j = 0; j < 10; j++) {
       playerRowDiv.appendChild(elFactory('div', { x: i, y: j }, playerBoard.displayBoard()[i][j]));
+
       const temp = elFactory('div', { x: i, y: j }, computerBoard.displayBoard()[i][j]);
-      temp.addEventListener('click', (e) => {
-        playGame.playOnce(e);
-        playGame.checkGame();
-      });
+      temp.addEventListener('click', clickHandler);
 
       computerRowDiv.appendChild(temp);
     }

@@ -5,12 +5,12 @@ function players() {
   const gBoardPlayer = gameboard();
 
   gBoardPlayer.placeShip(3, [1, 2], 'horizontal');
-  gBoardPlayer.placeShip(3, [1, 3], 'horizontal');
+  /*   gBoardPlayer.placeShip(3, [1, 3], 'horizontal');
   gBoardPlayer.placeShip(5, [3, 3], 'vertical');
   gBoardPlayer.placeShip(2, [8, 8], 'vertical');
   gBoardPlayer.placeShip(2, [7, 5], 'horizontal');
   gBoardPlayer.placeShip(4, [2, 5], 'horizontal');
-
+ */
   return gBoardPlayer;
 }
 
@@ -27,5 +27,6 @@ function computer() {
   return gBoardComp;
 }
 
-players();
-export { players, computer };
+const playerBoard = players();
+const computerBoard = computer();
+export { playerBoard, computerBoard };

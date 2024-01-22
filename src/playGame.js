@@ -1,11 +1,9 @@
-import { players, computer } from './players';
-
-export const playerBoard = players();
-export const computerBoard = computer();
+import { playerBoard, computerBoard } from './players';
+import { updateDOM, removeAllEventListners } from './updateDOM';
 
 // obtained using DOM
-export function playerCordFun(e) {
-  console.log(e.target.getAttribute('x'), e.target.getAttribute('y'));
+function playerCordFun(e) {
+  e.target.removeEventListener('click', clickHandler);
   return [e.target.getAttribute('x'), e.target.getAttribute('y')];
 }
 
@@ -25,7 +23,6 @@ const playGame = (() => {
     computerBoard.receiveAttack(playerCord);
 
     // player gets hit
-    console.log(computerBoard.displayBoard());
     let computerCord = computerCordFun();
     while (
       playerBoard.displayBoard()[computerCord[0]][computerCord[1]] === 'm' ||
@@ -37,13 +34,18 @@ const playGame = (() => {
 
     playerSunkShips = playerBoard.displayShipArr().filter((ship) => ship.sunk === false);
     computerSunkShips = computerBoard.displayShipArr().filter((ship) => ship.sunk === false);
+
+    // function to update DOM
+    updateDOM(playerBoard, computerBoard, playerCord, this);
   }
 
   function checkGame() {
     if (!playerSunkShips.length) {
+      removeAllEventListners(clickHandler);
       return [true, 'Computer wins'];
     }
     if (!computerSunkShips.length) {
+      removeAllEventListners(clickHandler);
       return [true, 'Player wins '];
     }
     return false;
@@ -54,5 +56,10 @@ const playGame = (() => {
     checkGame,
   };
 })();
+
+export const clickHandler = (e) => {
+  playGame.playOnce(e);
+  playGame.checkGame();
+};
 
 export default playGame;
