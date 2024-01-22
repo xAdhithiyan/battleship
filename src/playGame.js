@@ -1,9 +1,9 @@
 import { playerBoard, computerBoard } from './players';
-import { updateDOM, removeAllEventListners } from './updateDOM';
+import { updateDOM, removeAllEvent, removeOneEvent } from './updateDOM';
 
 // obtained using DOM
 function playerCordFun(e) {
-  e.target.removeEventListener('click', clickHandler);
+  removeOneEvent(e, clickHandler);
   return [e.target.getAttribute('x'), e.target.getAttribute('y')];
 }
 
@@ -41,14 +41,12 @@ const playGame = (() => {
 
   function checkGame() {
     if (!playerSunkShips.length) {
-      removeAllEventListners(clickHandler);
       return [true, 'Computer wins'];
     }
     if (!computerSunkShips.length) {
-      removeAllEventListners(clickHandler);
       return [true, 'Player wins '];
     }
-    return false;
+    return [false, ''];
   }
 
   return {
@@ -59,7 +57,9 @@ const playGame = (() => {
 
 export const clickHandler = (e) => {
   playGame.playOnce(e);
-  playGame.checkGame();
+  if (playGame.checkGame()[0]) {
+    removeAllEvent(clickHandler, playGame.checkGame()[1]);
+  }
 };
 
 export default playGame;

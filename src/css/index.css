@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
 :root {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Amatic SC', sans-serif;
+  --main-color: #cbce91ff;
+  --side-color: #9cc3d5ff;
+  --valid-color: rgb(44, 238, 144);
+  --invalid-color: rgb(198, 117, 88);
 }
 
 html {
-  background-color: slategrey;
+  background-color: var(--main-color);
 }
 body {
   height: 99vh;
@@ -12,5 +16,19 @@ body {
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   align-items: center;
-  grid-template-rows: 100px 100px 1fr 60px;
+  grid-template-rows: 120px 80px 1fr 60px;
+}
+
+.header,
+.info {
+  font-weight: 900;
+  align-self: flex-end;
+  font-size: 5.5rem;
+}
+.info {
+  text-align: center;
+  width: 60%;
+  font-size: 2.2rem;
+  padding: 20px;
+  border-bottom: 2px solid black;
 }

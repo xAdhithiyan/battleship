@@ -1,6 +1,7 @@
 import elFactory from './elFactory';
 import { playerBoard, computerBoard } from './players';
 import { clickHandler } from './playGame';
+import githubImg from '../assets/github.svg';
 
 function DOM() {
   const parentDiv = document.querySelector('body');
@@ -24,6 +25,14 @@ function DOM() {
   }
   parentDiv.appendChild(playerDiv);
   parentDiv.appendChild(computerDiv);
+
+  // footer
+  const mainFooter = elFactory('div', { class: 'footer' }, '');
+  mainFooter.appendChild(elFactory('div', {}, 'Made by Adhithiyan'));
+  const anchor = elFactory('a', { href: 'https://github.com/xAdhithiyan', target: '_blank' }, '');
+  anchor.appendChild(elFactory('img', { src: githubImg }, ''));
+  mainFooter.appendChild(anchor);
+  parentDiv.appendChild(mainFooter);
 }
 
 export default DOM;
