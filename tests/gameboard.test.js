@@ -45,7 +45,5 @@ describe('gboard creation', () => {
     // to test missed shot
     gboard.receiveAttack([9, 9]);
     expect(gboard.displayBoard()[9][9]).toBe('m');
-
-    console.log(gboard.displayBoard());
   });
 });

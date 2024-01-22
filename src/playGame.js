@@ -1,4 +1,4 @@
-import { players, computer } from './players.js';
+import { players, computer } from './players';
 
 let a = 0;
 
@@ -50,4 +50,4 @@ function playGame() {
   }
 }
 
-playGame();
+export default playGame;

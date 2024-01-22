@@ -1,4 +1,4 @@
-import gameboard from './gameboard.js';
+import gameboard from './gameboard';
 
 // obtained using DOM
 function players() {
@@ -16,7 +16,7 @@ function players() {
 
 function computer() {
   const gBoardComp = gameboard();
-  while (gBoardComp.displayShipArr().length < 1) {
+  while (gBoardComp.displayShipArr().length < 5) {
     const len = Math.floor(Math.random() * 4 + 2);
     const xCord = Math.floor(Math.random() * 9);
     const yCord = Math.floor(Math.random() * 9);

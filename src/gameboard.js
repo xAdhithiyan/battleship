@@ -1,4 +1,4 @@
-import ships from './ships.js';
+import ships from './ships';
 
 // eslint-disable-next-line
 const gameboard = function () {
