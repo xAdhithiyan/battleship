@@ -7,7 +7,7 @@ html {
   background-color: slategrey;
 }
 body {
-  height: 97vh;
+  height: 99vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;
