@@ -4,16 +4,26 @@ import { removeAllEventsPlayer, updateOnlyPlayer } from './updateDOM';
 // obtained using DOM
 function players() {
   const gBoardPlayer = gameboard();
+
+  // for vertical or horizontal
+  // eslint-disable-next-line
+  let count = 0;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
+      count += 1;
+    }
+  });
+
   function createAShip(e) {
     if (gBoardPlayer.displayShipArr().length < 5) {
       const len = gBoardPlayer.displayShipArr().length === 4 ? 5 : gBoardPlayer.displayShipArr().length + 2;
       const xCord = +e.target.getAttribute('x');
       const yCord = +e.target.getAttribute('y');
-      const direction = 'horizontal';
-      console.log(len, xCord, yCord, direction);
-      gBoardPlayer.placeShip(len, [xCord, yCord], direction);
-
-      updateOnlyPlayer(gBoardPlayer);
+      const direction = count % 2 === 0 ? 'horizontal' : 'vertical';
+      const condition = gBoardPlayer.placeShip(len, [xCord, yCord], direction);
+      if (condition) {
+        updateOnlyPlayer(gBoardPlayer, len);
+      }
     }
     if (gBoardPlayer.displayShipArr().length === 5) {
       removeAllEventsPlayer(clickHandlerPlayer);

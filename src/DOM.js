@@ -2,6 +2,7 @@ import elFactory from './elFactory';
 import { playerBoard, computerBoard, clickHandlerPlayer } from './players';
 import { clickHandler } from './playGame';
 import githubImg from '../assets/github.svg';
+import { mouseOutHandler, mouseOverHandler } from './updateDOM';
 
 function DOM() {
   const parentDiv = document.querySelector('body');
@@ -17,6 +18,8 @@ function DOM() {
       // player board
       const tempComp = elFactory('div', { x: i, y: j }, playerBoard.displayBoard()[i][j]);
       tempComp.addEventListener('click', clickHandlerPlayer);
+      tempComp.addEventListener('mouseover', mouseOverHandler);
+      tempComp.addEventListener('mouseout', mouseOutHandler);
       playerRowDiv.appendChild(tempComp);
 
       // computer board
@@ -27,6 +30,7 @@ function DOM() {
     playerDiv.appendChild(playerRowDiv);
     computerDiv.appendChild(computerRowDiv);
   }
+  playerDiv.appendChild(elFactory('div', { class: 'boardInfo' }, '2x Ship - Press r to rotate ship '));
   parentDiv.appendChild(playerDiv);
   parentDiv.appendChild(computerDiv);
 
